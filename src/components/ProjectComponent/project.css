@@ -1,0 +1,26 @@
+.ProjectCard {
+    width: 18rem !important;
+    height: fit-content;
+    border: 1px solid rgb(74, 92, 228);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+    background-color: #fff;
+}
+.btn{
+    color: #fff;
+    background-color:   rgb(74, 92, 228);
+    
+}
+.btn:hover{
+    background-color: rgb(55, 73, 215);
+    color: #fff;
+}
+.ProjectCard:hover{
+    box-shadow: 2px 2px 2px rgb(74, 92, 228);
+    transition: 0.1s ease-in-out ;
+    
+}
+.preview{
+    padding: 10px;
+}
