@@ -24,3 +24,16 @@
 .preview{
     padding: 10px;
 }
+.btn-danger{
+    background-color: red;
+    
+}
+.btn-danger:hover{
+    color: red;
+    background-color: #fff;
+}
+.space-between{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

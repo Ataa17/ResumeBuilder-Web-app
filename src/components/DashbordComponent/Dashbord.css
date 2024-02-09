@@ -60,6 +60,7 @@ li{
 a{
   color: #fff;
   text-decoration: none;
+
 }
 .logout{
   width: 100%;
@@ -81,4 +82,36 @@ a{
 }
 .closed .nav-item{
   display: none;
+}
+.nav-menu{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  padding: 20px;
+}
+.noborder{
+  border-radius: 0;
+  width: 10rem;
+}
+.header{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between ;
+  padding: 10px 0;
+}
+.icon{
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+.space-between{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.info{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
 }

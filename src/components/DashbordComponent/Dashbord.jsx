@@ -3,8 +3,8 @@ import './Dashbord.css';
 import Project from '../ProjectComponent/Project';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-
+import * as FontAwesome from '@fortawesome/free-solid-svg-icons'
+import logo from '../../assets/logoBlanc.png';
 import { useState, useEffect } from 'react';
 
 const project1 = {
@@ -16,7 +16,7 @@ const user = {
   name: 'Ataa',
   photo: 'https://placeholder.co/300',
 };
-const projects = [project1, project1, project1, project1, project1, project1,]
+const projects = [project1, project1, project1, project1, project1,]
 
 
 function Dashbord() {
@@ -31,7 +31,7 @@ function Dashbord() {
 
   useEffect(() => {
     const handleResize = () => {
-      setScreenSize(window.innerWidth > 768);
+      setScreenSize(window.innerWidth > 991);
     };
 
     handleResize();
@@ -53,43 +53,58 @@ function Dashbord() {
       <div className="row">
 
         <aside className='col-lg-3 col-sm-12 aside'>
+          <div className="header nav-menu">
+            <img src={logo} alt="logo" className='img-fluid noborder' />
+            <a type='button' onClick={toggleMenu}>
+              { 
+              !screenSize?          (!(show) ? <FontAwesomeIcon className='icon' icon={FontAwesome.faBars} /> : <FontAwesomeIcon className='icon' icon={FontAwesome.faXmark} />):null
 
-          <div>
-            <img className='img-fluid' src={user.photo ? user.photo : "https://placeholder.co/300"} alt="user image" />
-            <a type='button' onClick={toggleMenu}>            <h1 className='text-center'>{user.name}
-              {
-                !show ? <>, click to see the menu</> : null
               }
-
-            </h1>
             </a>
           </div>
+
+
 
           {
             show ?
               (
                 <>
                   <div>
+                    <img className='img-fluid' src={user.photo ? user.photo : "https://placeholder.co/300"} alt="user image" />
+
+
+
+                    <a type='button'  >
+                      <h1 className='text-center'>{user.name}</h1>
+
+                    </a>
+                  </div>
+                  <div>
                     <ul>
                       <li>
                         <button className={
                           !screenSize ? 'btn text-center btn1' : 'btn btn1'
                         }>
-                          <FontAwesomeIcon icon="fa-solid fa-gear" />
+                          <FontAwesomeIcon className='icon' icon={FontAwesome.faAdd} />
                           Create a new project
                         </button>
                       </li>
                       <li ><a type='button' className={
                         !screenSize ? 'btn text-center btn1' : 'btn btn1'
-                      }><FontAwesomeIcon icon="fa-solid fa-gear" />
+                      }><FontAwesomeIcon className='icon' icon={FontAwesome.faFolderOpen} />
                         Browse Templates</a></li>
                       <li ><a type='button' className={
-                        !screenSize ? 'btn text-center btn1' : 'btn btn1'
-                      }>Settings</a></li>
+                        !screenSize ? 'btn text-center btn1 ' : 'btn btn1'
+                      }>
+                        <FontAwesomeIcon className='icon' icon={FontAwesome.faGear} />
+                        Settings</a></li>
                     </ul>
                   </div>
                   <div className="logout">
-                    <button className='btn btn1'>Log out</button>
+                    <button className='btn btn1'>
+                    <FontAwesomeIcon className='icon' icon={FontAwesome.faSignOut} />
+
+                      Log out</button>
                   </div>
                 </>
               ) : null
@@ -97,9 +112,11 @@ function Dashbord() {
         </aside>
         <main className='col-lg-9 col-sm-12'>
           <div className="row row-cols-3">
-            <a href="#" className="add">
+            <a type='button' className="add">
               <div >
-                Add a new project +
+              <FontAwesomeIcon className='icon' icon={FontAwesome.faFile} />
+
+                Add a new project 
 
               </div>
             </a>
@@ -109,8 +126,16 @@ function Dashbord() {
                   return (<Project key={p.title} project={p} />)
                 })
               ) : (
-                <h1>There are no projects</h1>
-              )
+<div className="info">
+<a type='button' className="add">
+              <div >
+              <FontAwesomeIcon className='icon' icon={FontAwesome.faFolderBlank} />
+
+                <h1>There are no Projects !</h1>
+
+              </div>
+            </a>
+</div>              )
             }
           </div>
 
