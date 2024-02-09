@@ -49,7 +49,14 @@ ul{
 }
 li{
   margin: 5px 0;
+  display: flex;
+  flex-direction: row;
+  padding: 10px ;
 }
+.icon{
+  margin-right: 10px;
+}
+
 a{
   color: #fff;
   text-decoration: none;
@@ -67,4 +74,11 @@ a{
   text-align: left;
   width: 100%;
   height:fit-content ;
+}
+.closed {
+  width: fit-content;
+  justify-content:flex-start ;
+}
+.closed .nav-item{
+  display: none;
 }
