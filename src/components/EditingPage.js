@@ -15,6 +15,8 @@ import p10 from "../assets/chevron-down-svgrepo-comcopy.svg";
 import p11 from "../assets/text-square-svgrepo-com.svg";
 import p12 from "../assets/menu-svgrepo-comcopy.svg";
 import p13 from "../assets/full-screen-svgrepo-com.svg";
+import arrow_back from "../assets/arrow-back.svg";
+
 import tick from "../assets/tick.svg";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import d from "../assets/delete.svg";
@@ -217,6 +219,14 @@ export default function EditingPage(props) {
             : "w-3/5 header flex-grow  md:overflow-y-auto"
         }
       >
+        <div className="flex justify-between p-5 mx-auto">
+          <button className="flex justify-center items-center rounded-xl  text-center px-2 ml-5 border-2 rounded-lg hover:scale-110 transition-all duration-200" style={{ borderColor: "#4A5CE4CC" }}>
+            <img src={arrow_back} className=" h-8 w-8  " ></img>
+            <h1 className="font-bold">back to dashboard</h1>
+          </button>
+          <>
+          </>
+        </div>
         <div className="flex flex-row justify-between p-5  items-center max-w-[670px] mx-auto ">
           <h1 className="font-light text-[34px] text-black">
             {" "}
