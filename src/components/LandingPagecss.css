@@ -1,0 +1,126 @@
+.first{
+    background-color : #e9edf0; 
+
+}
+.title1{
+    color: #4a5ce4;
+    font-size: 50px;
+    margin: auto ;
+    width: 50%;
+   display: flex;
+   justify-content: center;
+   font-weight: bold;
+}
+
+.title2{
+    color: #4a5ce4;
+    width: 100%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    margin: auto;
+    display: flex;
+   justify-content: center;
+    font-weight: bold;
+}
+h5{
+    font-size:15px; 
+    font-weight: bold;
+    display: flex;
+    justify-content: center;  
+    font-weight: bold !important;
+}
+.second{
+    
+    background-color : white; 
+}
+.third{
+    background-color: #4a5ce4;
+    width: 100.8%;
+}
+.cv{
+    width: 100% !important;
+    border: 2px solid #000 !important;
+
+}
+.rounded{
+    width: 60%;
+    border: 3px solid #000;
+    border-bottom: none;
+    
+
+}
+.but{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3%;
+    padding-top: 3%;
+}
+.btn{
+    background-color: #000 !important;
+    border-radius: 20px !important;
+    width: 15%;
+    
+}
+.subtitle{
+    padding-top: 5%;
+    
+}
+
+.h4{
+    font-size: 80% !important;
+    padding-top: 5%;
+   
+}
+.h6{
+    font-size: 60% !important;
+}
+
+.form-control{
+    border-style: inset !important;
+}
+.title3{
+    color: #e9edf0;
+    display: flex;
+    justify-content: center;
+    font-size: 250%;
+    font-weight: bold;
+}
+.divtitle3{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.fc{
+    filter: brightness(4);
+    padding-top: 300%;
+}
+.feedback{
+    font-size: 400% !important;
+    padding-top: 3%;
+    padding-bottom: 15%;
+}
+
+#floatingInputDisabled{
+    padding-bottom: 20% !important;
+}
+.feed{
+    font-size: 22% !important; 
+}
+.text-center{
+    text-align: center;
+}
+.main_img{
+    display: block;
+    margin: 0 auto;
+}
+.copyright{
+    display: flex;
+    justify-content: center;
+}
+.icon{
+    width: 30px;
+    padding-top: 30%;
+}
+.t{
+    padding-top: 280%;
+    padding-left: 30%;
+}
