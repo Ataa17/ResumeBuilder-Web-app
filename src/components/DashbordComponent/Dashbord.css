@@ -1,0 +1,117 @@
+.container-fluid{
+  background-color: #e9edf0;
+
+}
+.aside{
+  background-color: rgb(74, 92, 228);
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.add{
+  width: 18rem;
+  height:auto;
+  border: 1px solid #4a5ce4  ;
+  border-radius: 10px;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  margin: 20px;;
+  color: #4a5ce4;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+.add:hover{
+  box-shadow: 2px 2px 2px rgb(74, 92, 228);
+    transition: 0.1s ease-in-out ;
+}
+.row{
+  height: 100vh;
+  justify-content: center;
+  overflow-y: scroll;
+}
+.img-fluid{
+    width: 15rem;
+    margin: 0 auto;
+    display: block;
+    height: auto;
+    border-radius: 50%;
+    text-align: center;
+  
+}
+
+ul{
+  list-style: none;
+  text-align: left;
+}
+li{
+  margin: 5px 0;
+  display: flex;
+  flex-direction: row;
+  padding: 10px ;
+}
+.icon{
+  margin-right: 10px;
+}
+
+a{
+  color: #fff;
+  text-decoration: none;
+
+}
+.logout{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.logout button{
+  text-align: center;
+}
+.btn1{
+  text-align: left;
+  width: 100%;
+  height:fit-content ;
+}
+.closed {
+  width: fit-content;
+  justify-content:flex-start ;
+}
+.closed .nav-item{
+  display: none;
+}
+.nav-menu{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  padding: 20px;
+}
+.noborder{
+  border-radius: 0;
+  width: 10rem;
+}
+.header{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between ;
+  padding: 10px 0;
+}
+.icon{
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+.space-between{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.info{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
