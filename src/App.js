@@ -1,11 +1,48 @@
 import index from './index.css';
 import logoNoir from './assets/logoNoir.png';
 import EditingPage from './components/EditingPage';
-
+import { useEffect,useState ,useLayoutEffect} from 'react';
 function App() {
+  const [auth, setAuth] = useState(undefined);
+
+useEffect(() => {
+  async function login() {
+    try {
+      const loginResponse = await fetch('http://localhost:8000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          
+            email: "email.example@gmail.com", 
+            password: "MyPasswordIs0xDeadBeef",
+           
+          
+        }),
+      });
+
+      const loginData = await loginResponse.json();
+      console.log("Login Response:", loginData);
+      setAuth((prev)=>loginData.Authorization);
+
+      if (!loginResponse.ok) {
+        console.error("Login failed.");
+      }
+
+      return loginData; 
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
+  }
+
+  login(); 
+}, []);
+
+
   return (
   <>
-     <EditingPage/>
+     <EditingPage auth={auth}/>
   </>
   );
 }
