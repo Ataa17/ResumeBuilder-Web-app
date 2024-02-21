@@ -16,15 +16,14 @@ import p13 from "../assets/full-screen-svgrepo-com.svg";
 import preview from "../assets/preview.svg";
 import arrow_back from "../assets/arrow-back.svg";
 import { motion, AnimatePresence } from "framer-motion";
+import "tailwindcss/tailwind.css";
+import { useParams } from 'react-router-dom';
 
 import tick from "../assets/tick.svg";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import d from "../assets/delete.svg";
 import edit from "../assets/edit.svg";
-// problem to fix : when a new field is about to be added but decide to edit one , after editing the new field hides so new one must be made resulting in two and needing only one , gotta fix in all
-// level in skills is fucked
-//maybe initialise clicks based on if theres a null element or not
-//max there can be one only null field this might help 
+// maybe ill have to remove adding stuff by "enter" cause it screws up stuff
 const monthes = [
   "January",
   "February",
@@ -104,7 +103,6 @@ const language_levels = [
   "Fluent",
   "Native",
 ];
-const projectId = "00fcb077-9b3b-49b2-ab30-0d8a18041689";
 const sizes = ["sm", "md", "lg"];
 const fonts = ["sans", "serif", "mono"];
 const bg_colors = ["white", "gray", "black"];
@@ -140,15 +138,10 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
 
 */
 
-  const tempi = {
-    projectId: "5e5f993e-343c-471c-b824-822345e25375",
-    fieldValue: 5,
-    fieldName: "level",
-    entryName: "Language",
-    tag: 0,
-  };
-
+ 
   const [template, setTemplate] = useState("");
+  const { projectId } = useParams();
+  console.log(projectId);
 
   useEffect(() => {
     // getting the template (Marine)
@@ -265,7 +258,7 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
         if (!auth || dataFetched) return;
 
         const allProjects = await fetch(
-          "http://localhost:8000/project/snapshot/00fcb077-9b3b-49b2-ab30-0d8a18041689",
+          "http://localhost:8000/project/snapshot/"+projectId,
           {
             method: "GET",
             headers: {
@@ -382,7 +375,7 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
       try {
         if (!auth) return;
         const infos = await fetch(
-          "http://localhost:8000/project/info/00fcb077-9b3b-49b2-ab30-0d8a18041689",
+          "http://localhost:8000/project/info/" + projectId,
           {
             method: "GET",
             headers: {
@@ -424,7 +417,7 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
                 Authorization: auth,
               },
               body: JSON.stringify({
-                projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+                projectId: projectId,
                 fieldValue: changement[2],
                 fieldName: kind,
                 entryName: "Snapshot",
@@ -483,11 +476,11 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
               Authorization: auth,
             },
             body: JSON.stringify({
-              projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+              projectId: projectId,
               fieldValue: i,
               fieldName: kind ,
               entryName: "Orders",
-            }),
+            }), 
           }
         );
         if (!addFieldResponse.ok) {
@@ -603,7 +596,9 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
             style={{ borderColor: "#4A5CE4CC" }}
           >
             <img src={arrow_back} className=" h-8 w-8  "></img>
-            <h1 className="font-bold">back to dashboard</h1>
+            <a className="font-bold" href="/">
+              back to dashboard
+            </a>
           </button>
           <></>
         </div>
@@ -1054,6 +1049,9 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
                                           add={add}
                                           setAdd={setAdd}
                                           adding_index={3}
+                                          data_retrieved={data_retrieved}
+                                          setData_retrieved={setData_retrieved}
+                                          projectId={projectId}
                                         />
                                       ) : character.id === "2" ? (
                                         <LanguagesComponent
@@ -1066,6 +1064,9 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
                                           auth={auth}
                                           clickss={clicks}
                                           setClickss={setClicks}
+                                          data_retrieved={data_retrieved}
+                                          setData_retrieved={setData_retrieved}
+                                          projectId={projectId}
                                         />
                                       ) : character.id === "3" ? (
                                         <InterestsComponent
@@ -1077,6 +1078,9 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
                                           auth={auth}
                                           clickss={clicks}
                                           setClickss={setClicks}
+                                          data_retrieved={data_retrieved}
+                                          setData_retrieved={setData_retrieved}
+                                          projectId={projectId}
                                         />
                                       ) : character.id === "4" ? (
                                         <LanguagesComponent
@@ -1089,6 +1093,9 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
                                           auth={auth}
                                           clickss={clicks}
                                           setClickss={setClicks}
+                                          data_retrieved={data_retrieved}
+                                          setData_retrieved={setData_retrieved}
+                                          projectId={projectId}
                                         />
                                       ) : (
                                         <ProfessionalExperienceComponent
@@ -1107,6 +1114,9 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
                                           auth={auth}
                                           clickss={clicks}
                                           setClickss={setClicks}
+                                          data_retrieved={data_retrieved}
+                                          setData_retrieved={setData_retrieved}
+                                          projectId={projectId}
                                         />
                                       ))}
                                   </div>
@@ -1335,6 +1345,9 @@ const LanguagesComponent = ({
   thing,
   clickss,
   setClickss,
+  data_retrieved,
+  setData_retrieved,
+  projectId,
 }) => {
   const [changement, setChangement] = useState([
     false,
@@ -1355,7 +1368,6 @@ const LanguagesComponent = ({
 
   useEffect(() => {
     if (clicks == 1) {
-      // modify the true here cause wheneevr opened it adds new
       setClickss((prev) => {
         const temp = [...prev];
         temp[choice] = 0;
@@ -1374,7 +1386,7 @@ const LanguagesComponent = ({
                 Authorization: auth,
               },
               body: JSON.stringify({
-                projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+                projectId: projectId,
                 entryName: thing,
               }),
             }
@@ -1389,7 +1401,15 @@ const LanguagesComponent = ({
           console.error("Error during addField:", error);
         }
       }
-      addField();
+      console.log(data_retrieved[thing].length, val.length);
+      if (data_retrieved[thing].length <= val.length) {
+        setData_retrieved((prev) => {
+          const temp = { ...prev };
+          temp[thing].push({ name: "", level: 1 });
+          return temp;
+        });
+        addField();
+      }
     }
   }, [clicks]);
   useEffect(() => {
@@ -1411,7 +1431,7 @@ const LanguagesComponent = ({
                 Authorization: auth,
               },
               body: JSON.stringify({
-                projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+                projectId: projectId,
                 fieldValue: changement[2],
                 fieldName: kind,
                 entryName: thing,
@@ -1452,7 +1472,7 @@ const LanguagesComponent = ({
                 Authorization: auth,
               },
               body: JSON.stringify({
-                projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+                projectId: projectId,
                 fieldValue: name,
                 fieldName: kind,
                 entryName: thing,
@@ -1744,6 +1764,9 @@ const InterestsComponent = ({
   adding_index,
   clickss,
   setClickss,
+  data_retrieved,
+  setData_retrieved,
+  projectId,
 }) => {
   const [changement, setChangement] = useState([
     false,
@@ -1784,7 +1807,7 @@ const InterestsComponent = ({
                 Authorization: auth,
               },
               body: JSON.stringify({
-                projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+                projectId: projectId,
                 entryName: "Interest",
               }),
             }
@@ -1799,7 +1822,14 @@ const InterestsComponent = ({
           console.error("Error during addField:", error);
         }
       }
-      addField();
+      if (data_retrieved.Interest.length <= val.length) {
+        setData_retrieved((prev) => {
+          const temp = { ...prev };
+          temp.Interest.push({ name: "", level: 1 });
+          return temp;
+        });
+        addField();
+      }
     }
   }, [clicks]);
   useEffect(() => {
@@ -1822,7 +1852,7 @@ const InterestsComponent = ({
                 Authorization: auth,
               },
               body: JSON.stringify({
-                projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+                projectId: projectId,
                 fieldValue: changement[2],
                 fieldName: kind,
                 entryName: "Interest",
@@ -1863,7 +1893,7 @@ const InterestsComponent = ({
                 Authorization: auth,
               },
               body: JSON.stringify({
-                projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+                projectId: projectId,
                 fieldValue: name,
                 fieldName: kind,
                 entryName: "Interest",
@@ -2102,6 +2132,9 @@ const ProfessionalExperienceComponent = ({
   adding_index,
   clickss,
   setClickss,
+  data_retrieved,
+  setData_retrieved,
+  projectId,
 }) => {
   const [changement, setChangement] = useState([
     false,
@@ -2145,7 +2178,7 @@ const ProfessionalExperienceComponent = ({
                 Authorization: auth,
               },
               body: JSON.stringify({
-                projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+                projectId: projectId,
                 entryName:
                   things[3] == "Education" ? "Education" : "ProfessionalExp",
               }),
@@ -2161,7 +2194,16 @@ const ProfessionalExperienceComponent = ({
           console.error("Error during addField:", error);
         }
       }
-      addField();
+      const temp_choice =
+        things[3] == "Education" ? "Education" : "ProfessionalExp";
+      if (data_retrieved[temp_choice].length <= val.length) {
+        setData_retrieved((prev) => {
+          const temp = { ...prev };
+          temp[temp_choice].push({ name: "", level: 1 });
+          return temp;
+        });
+        addField();
+      }
     }
   }, [clicks]);
   useEffect(() => {
@@ -2184,7 +2226,7 @@ const ProfessionalExperienceComponent = ({
                 Authorization: auth,
               },
               body: JSON.stringify({
-                projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+                projectId: projectId,
                 fieldValue: changement[2],
                 fieldName: kind,
                 entryName:
@@ -2226,7 +2268,7 @@ const ProfessionalExperienceComponent = ({
                 Authorization: auth,
               },
               body: JSON.stringify({
-                projectId: "00fcb077-9b3b-49b2-ab30-0d8a18041689",
+                projectId: projectId,
                 fieldValue: name,
                 fieldName: kind,
                 entryName:

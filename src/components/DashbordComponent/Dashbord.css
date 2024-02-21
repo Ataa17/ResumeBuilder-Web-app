@@ -45,7 +45,7 @@
 
 ul{
   list-style: none;
-  text-align: left;
+  text-align: left ;
 }
 li{
   margin: 5px 0;
@@ -72,7 +72,7 @@ a{
   text-align: center;
 }
 .btn1{
-  text-align: left;
+  text-align: left !important; 
   width: 100%;
   height:fit-content ;
 }
@@ -114,4 +114,15 @@ a{
   flex-direction: row;
   justify-content: center;
   text-align: center;
+}
+
+
+.ProjectCard {
+  width: 18rem !important;
+  height: fit-content;
+  border: 1px solid rgb(74, 92, 228);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px;
+  background-color: #fff;
 }

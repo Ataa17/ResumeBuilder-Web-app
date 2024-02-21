@@ -2,6 +2,13 @@ import index from './index.css';
 import logoNoir from './assets/logoNoir.png';
 import EditingPage from './components/EditingPage';
 import { useEffect,useState ,useLayoutEffect} from 'react';
+import Dashbord from './components/DashbordComponent/Dashbord';
+import { BrowserRouter as Router, Route,Routes} from 'react-router-dom';
+
+
+//for routing , check if the project id is valid or not and add conditions to the routes for security reasons
+
+
 function App() {
   const [auth, setAuth] = useState(undefined);
 
@@ -42,12 +49,12 @@ useEffect(() => {
 
   return (
   <>
-      <div className="App">
-      <div className='card text-center' >
-        <img src={logoNoir}  className="card-img-top" alt="ResumeBuilder logo"/>
-        <h1 className="card-title">Welcome to ResumeBuilder</h1>
-      </div>
-    </div>
+ <Router>
+      <Routes>
+      <Route path="/edit/:projectId" element={<EditingPage auth={auth} />} />
+        <Route exact path="/" element={<Dashbord auth={auth} />} />
+      </Routes>
+    </Router>
   </>
   );
 }

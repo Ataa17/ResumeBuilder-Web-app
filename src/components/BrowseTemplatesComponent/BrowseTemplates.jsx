@@ -11,6 +11,7 @@ function Template({ thumbnail }) {
 function BrowseTemplates() {
   const [thumbnailsData, setThumbnailsData] = useState([]);
 
+
   useEffect(() => {
     async function fetchData() {
       try {
