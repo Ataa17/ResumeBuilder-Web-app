@@ -18,7 +18,7 @@ import arrow_back from "../assets/arrow-back.svg";
 import { motion, AnimatePresence } from "framer-motion";
 import "tailwindcss/tailwind.css";
 import { useParams } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import tick from "../assets/tick.svg";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import d from "../assets/delete.svg";
@@ -121,27 +121,11 @@ const handleOnDragEnd = (result, items, setItems) => {
 };
 
 export default function EditingPage({ auth }) {
-  /*
-creationDate: 1707752724185
 
-id: "e9acbdc9-2f0f-42a4-bbcc-81480af4f9e0"
 
-snapshot: {Interest: [], Formation: [], ProfessionalExp: [], Skill: [], Language: [], …}
-
-title: "My first project"
-
-userId: "e9acbdc9-2f0f-42a4-bbcc-81480af4f9e0" */
-
-  /*
-"templateName": "template1"
-projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
-
-*/
-
- 
+const navigate = useNavigate();
   const [template, setTemplate] = useState("");
   const { projectId } = useParams();
-  console.log(projectId);
 
   useEffect(() => {
     // getting the template (Marine)
@@ -596,9 +580,11 @@ projid = a6c3168b-4dd6-4447-a449-0764ebe9ff26
             style={{ borderColor: "#4A5CE4CC" }}
           >
             <img src={arrow_back} className=" h-8 w-8  "></img>
-            <a className="font-bold" href="/">
+            <button className="font-bold" onClick={()=>{
+              navigate('/');
+            }}>
               back to dashboard
-            </a>
+            </button>
           </button>
           <></>
         </div>

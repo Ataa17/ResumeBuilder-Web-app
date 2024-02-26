@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as FontAwesome from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/logoBlanc.png";
 import { useState, useEffect, useLayoutEffect } from "react";
+import Cookies from "js-cookie";
 
 const project1 = {
   title: "Project 1",
@@ -16,7 +17,7 @@ const user = {
 };
 const projects = [project1, project1, project1, project1, project1];
 
-function Dashbord({ auth }) {
+function Dashbord({ auth ,setAuth}) {
   const [show, setShow] = useState(true);
   const [screenSize, setScreenSize] = useState(true);
   const toggleMenu = () => {
@@ -39,9 +40,6 @@ function Dashbord({ auth }) {
   useLayoutEffect(() => {
     const loadStyles = async () => {
       try {
-        await import("./Dashbord.css");
-        await import("bootstrap/dist/css/bootstrap.min.css");
-
         await new Promise((resolve) => setTimeout(resolve, 200));
 
         setLoading(false);
@@ -111,6 +109,7 @@ function Dashbord({ auth }) {
   const [newProjShow, setNewProjShow] = useState(true);
   const [trigger, setTrigger] = useState([false, "name"]);
   useEffect(() => {
+    console.log(auth);
     async function CreateProj() {
       if (!auth) return;
       if (!trigger[0]) return;
@@ -166,13 +165,22 @@ function Dashbord({ auth }) {
 
   return (
     <div
-      className="container-fluid text "
-      style={{ visibility: loading ? "hidden" : "visible" }}
+      className="   "
+      style={{
+        visibility: loading ? "hidden" : "visible",
+        backgroundColor: "#e9edf0",
+      }}
     >
-      <div className="row">
-        <aside className="col-lg-3 col-sm-12 aside">
-          <div className="header nav-menu">
-            <img src={logo} alt="logo" className="img-fluid noborder" />
+      <div className="flex lg:flex-row flex-col h-full overflow-hidden ">
+        <aside
+          className="col-lg-3 col-sm-12 p-16 text-center flex flex-col lg:w-2/6 lg:h-screen  lg:fixed overflow-hidden"
+          style={{
+            backgroundColor: "rgb(74, 92, 228)",
+            color: "#fff",
+          }}
+        >
+          <div className="p-3 flex items-center  justify-between">
+            <img src={logo} alt="logo" className=" w-40  " />
             <a type="button" onClick={toggleMenu}>
               {!screenSize ? (
                 !show ? (
@@ -188,25 +196,23 @@ function Dashbord({ auth }) {
           </div>
 
           {show ? (
-            <>
-              <div>
+            <div className="flex flex-col items-center justify-center ">
+              <div className="flex flex-col justify-center items-center">
                 <img
-                  className="img-fluid"
+                  className=" rounded-[50%] text-center w-48 h-48"
                   src={user.photo ? user.photo : "https://placeholder.co/300"}
                   alt="user image"
                 />
 
                 <a type="button">
-                  <h1 className="text-center">{user.name}</h1>
+                  <h1 className="text-center text-4xl mt-2">{user.name}</h1>
                 </a>
               </div>
-              <div>
-                <ul>
+              <div className="mt-4">
+                <ul className="space-y-6">
                   <li>
                     <button
-                      className={
-                        !screenSize ? "btn text-center btn1" : "btn btn1"
-                      }
+                      className="text-black hover:text-white duration-150 transition-all"
                       onClick={() => {
                         setNewProjShow(false);
                       }}
@@ -221,9 +227,7 @@ function Dashbord({ auth }) {
                   <li>
                     <a
                       type="button"
-                      className={
-                        !screenSize ? "btn text-center btn1" : "btn btn1"
-                      }
+                      className="text-black hover:text-white duration-150 transition-all cursor-pointer"
                     >
                       <FontAwesomeIcon
                         className="icon"
@@ -235,9 +239,7 @@ function Dashbord({ auth }) {
                   <li>
                     <a
                       type="button"
-                      className={
-                        !screenSize ? "btn text-center btn1 " : "btn btn1"
-                      }
+                      className="text-black hover:text-white duration-150 transition-all cursor-pointer"
                     >
                       <FontAwesomeIcon
                         className="icon"
@@ -248,8 +250,15 @@ function Dashbord({ auth }) {
                   </li>
                 </ul>
               </div>
-              <div className="logout">
-                <button className="btn btn1">
+              <div className="logout mt-6">
+                <button className="text-black hover:text-white duration-150 transition-all"
+                onClick={(e)=>
+                {
+                  e.preventDefault();
+                  setAuth(undefined);
+                  Cookies.remove('authToken');
+                }}
+                >
                   <FontAwesomeIcon
                     className="icon"
                     icon={FontAwesome.faSignOut}
@@ -257,15 +266,30 @@ function Dashbord({ auth }) {
                   Log out
                 </button>
               </div>
-            </>
+            </div>
           ) : null}
         </aside>
-        <main className="col-lg-9 col-sm-12">
-          <div className="row row-cols-3">
+        <div className="lg:w-2/6 ">
+
+        </div>
+        <main className="col-lg-9 col-sm-12 lg:w-4/6 ">
+          <div className=" flex-col md:flex-row md:flex-wrap flex gap-4 justify-around overflow-y-auto">
             {newProjShow ? (
               <div
                 type="button"
-                className="add"
+                className="w-72  rounded-md p-4 m-5 bg-white transition duration-200 ring-2 border border-blue-700 flex justify-center items-center"
+                style={{
+                  boxShadow: "0 0 0 0px rgba(0, 0, 255, 0.5)",
+                  transition: "box-shadow 0.2s ease-in-out",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow =
+                    "2px 4px 2px 1px rgba(0, 0, 255, 0.5)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow =
+                    "0 0 0 0px rgba(0, 0, 255, 0.5)";
+                }}
                 onClick={() => setNewProjShow(false)}
               >
                 <div className="">
@@ -274,24 +298,44 @@ function Dashbord({ auth }) {
                 </div>
               </div>
             ) : (
-              <div className="ProjectCard flex flex-col space-y-5">
-                <label htmlFor="name" className="mt-4">
-                  name :
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="bg-gray-200 rounded-md h-8 px-2"
-                  onChange={(e) =>
-                    setTrigger((prev) => [prev[0], e.target.value])
-                  }
-                />
-                <label htmlFor="tempi mr-10">template </label>
-                <select name="" id="tempi">
-                  <option value="">Obsidian</option>
-                  <option value="">Marine</option>
-                </select>
-                <div className="flex justify-around">
+              <div
+                className="w-72  rounded-md p-4 m-5 bg-white transition duration-200 ring-2 border border-blue-700 flex justify-center items-center  flex-col space-y-12"
+                style={{
+                  boxShadow: "0 0 0 0px rgba(0, 0, 255, 0.5)",
+                  transition: "box-shadow 0.2s ease-in-out",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow =
+                    "2px 4px 2px 1px rgba(0, 0, 255, 0.5)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow =
+                    "0 0 0 0px rgba(0, 0, 255, 0.5)";
+                }}
+              >
+                <div>
+                  <label htmlFor="name" className="mt-4">
+                    name :
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    className="bg-gray-200 rounded-md h-8 px-2"
+                    onChange={(e) =>
+                      setTrigger((prev) => [prev[0], e.target.value])
+                    }
+                  />
+                </div>
+                <div>
+                  <label htmlFor="tempi mr-10" className="mr-8">
+                    template :
+                  </label>
+                  <select name="" id="tempi">
+                    <option value="">Obsidian</option>
+                    <option value="">Marine</option>
+                  </select>
+                </div>
+                <div className="flex  space-x-12">
                   <button
                     className="bg-pink-200 px-2 rounded-lg mt-4 mb-2"
                     onClick={() => setTrigger((prev) => [true, prev[1]])}
