@@ -581,7 +581,7 @@ const navigate = useNavigate();
           >
             <img src={arrow_back} className=" h-8 w-8  "></img>
             <button className="font-bold" onClick={()=>{
-              navigate('/');
+              navigate('/dashboard');
             }}>
               back to dashboard
             </button>

@@ -17,40 +17,38 @@ const user = {
 };
 const projects = [project1, project1, project1, project1, project1];
 
-function Dashbord({ auth ,setAuth}) {
-  const [show, setShow] = useState(true);
-  const [screenSize, setScreenSize] = useState(true);
+function Dashbord({ auth, setAuth }) {
+  const [show, setShow] = useState(false);
+  const [screenSize, setScreenSize] = useState(window.innerWidth > 1024);
+
   const toggleMenu = () => {
-    setScreenSize(window.innerWidth > 768);
     if (!screenSize) {
-      setShow(!show);
+      setShow((prevShow) => !prevShow);
     }
   };
 
   useEffect(() => {
     const handleResize = () => {
-      setScreenSize(window.innerWidth > 991);
+      const isLargeScreen = window.innerWidth > 1024;
+
+      if (isLargeScreen) {
+        setShow(true);
+      } else if (screenSize) {
+        setShow(false);
+      }
+
+      setScreenSize(isLargeScreen);
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
-  }, []);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [screenSize]);
   const [loading, setLoading] = useState(true);
 
-  useLayoutEffect(() => {
-    const loadStyles = async () => {
-      try {
-        await new Promise((resolve) => setTimeout(resolve, 200));
-
-        setLoading(false);
-      } catch (error) {
-        console.error("Error loading styles:", error);
-        setLoading(false);
-      }
-    };
-
-    loadStyles();
-  }, []);
   const [projs, setProjs] = useState([]);
   useEffect(() => {
     async function fetchProjects() {
@@ -98,6 +96,7 @@ function Dashbord({ auth ,setAuth}) {
         if (!response.ok) {
           console.error("Projects fetch failed.");
         }
+        setLoading(false);
         return data;
       } catch (error) {
         console.error("Error during projects fetch:", error);
@@ -173,14 +172,14 @@ function Dashbord({ auth ,setAuth}) {
     >
       <div className="flex lg:flex-row flex-col h-full overflow-hidden ">
         <aside
-          className="col-lg-3 col-sm-12 p-16 text-center flex flex-col lg:w-2/6 lg:h-screen  lg:fixed overflow-hidden"
+          className="col-lg-3 col-sm-12 p-4 text-center flex flex-col lg:w-2/6 lg:h-screen  lg:fixed overflow-hidden"
           style={{
             backgroundColor: "rgb(74, 92, 228)",
             color: "#fff",
           }}
         >
           <div className="p-3 flex items-center  justify-between">
-            <img src={logo} alt="logo" className=" w-40  " />
+            <img src={logo} alt="logo" className=" w-40 lg:mb-14 mb-0 " />
             <a type="button" onClick={toggleMenu}>
               {!screenSize ? (
                 !show ? (
@@ -251,13 +250,13 @@ function Dashbord({ auth ,setAuth}) {
                 </ul>
               </div>
               <div className="logout mt-6">
-                <button className="text-black hover:text-white duration-150 transition-all"
-                onClick={(e)=>
-                {
-                  e.preventDefault();
-                  setAuth(undefined);
-                  Cookies.remove('authToken');
-                }}
+                <button
+                  className="text-black hover:text-white duration-150 transition-all"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setAuth(undefined);
+                    Cookies.remove("authTokenn");
+                  }}
                 >
                   <FontAwesomeIcon
                     className="icon"
@@ -269,11 +268,9 @@ function Dashbord({ auth ,setAuth}) {
             </div>
           ) : null}
         </aside>
-        <div className="lg:w-2/6 ">
-
-        </div>
+        <div className="lg:w-2/6 "></div>
         <main className="col-lg-9 col-sm-12 lg:w-4/6 ">
-          <div className=" flex-col md:flex-row md:flex-wrap flex gap-4 justify-around overflow-y-auto">
+          <div className="  flex-row flex-wrap flex gap-4 justify-around overflow-y-auto">
             {newProjShow ? (
               <div
                 type="button"
